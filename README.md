@@ -29,7 +29,7 @@ sam package \
     --template-file template.yaml \
     --output-template-file packaged.yaml \
     --capabilities CAPABILITY_IAM \
-    --s3-bucket REPLACE_THIS_WITH_YOUR_S3_BUCKET_NAME
+    --s3-bucket messaging-app-deploy
 
 sam deploy \
     --template-file packaged.yaml \
@@ -39,6 +39,12 @@ sam deploy \
 
 aws cloudformation describe-stacks \
     --stack-name simple-websocket-chat-app --query 'Stacks[].Outputs'
+``````
+sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket yonas0000
+
+sam deploy --template-file packaged.yaml --stack-name simple-messaging-app --capabilities CAPABILITY_IAM
+
+aws cloudformation describe-stacks --stack-name simple-websocket-chat-app --query 'Stacks[].Outputs'
 ```
 
 ## Testing the chat API
